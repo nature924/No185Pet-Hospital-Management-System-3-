@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.forest.demo.Mapper.Forest_HistoryRecordMapper">
+    <resultMap id="BaseResultMap" type="com.forest.demo.Entity.Forest_HistoryRecordEntity">
+        <!--@mbg.generated-->
+        <!--@Table forest_xitongyonghu-->
+        <id column="forest_HistoryRecord_ID" property="forest_HistoryRecord_ID"/>
+        <result column="forest_User_ID" property="forest_User_ID"/>
+        <result column="forest_Pets_ID" property="forest_Pets_ID"/>
+        <result column="forest_User_Pets_Time" property="forest_User_Pets_Time"/>
+        <result column="forest_User_LoginName" property="user.forest_User_LoginName"/>
+        <result column="forest_User_Password" property="user.forest_User_Password"/>
+        <result column="forest_User_Name" property="user.forest_User_Name"/>
+        <result column="forest_User_Sex" property="user.forest_User_Sex"/>
+        <result column="forest_User_Phone" property="user.forest_User_Phone"/>
+        <result column="forest_User_Card" property="user.forest_User_Card"/>
+        <result column="forest_User_Email" property="user.forest_User_Email"/>
+        <result column="forest_User_Time" property="user.forest_User_Time"/>
+        <result column="forest_User_Grade" property="user.forest_User_Grade"/>
+        <result column="forest_Pets_Photo" property="pet.forest_Pets_Photo"/>
+        <result column="forest_Pets_Name" property="pet.forest_Pets_Name"/>
+        <result column="forest_Pets_Sex" property="pet.forest_Pets_Sex"/>
+        <result column="forest_Pets_Type" property="pet.forest_Pets_Type"/>
+        <result column="forest_Pets_Age" property="pet.forest_Pets_Age"/>
+        <result column="forest_Pets_Disease" property="pet.forest_Pets_Disease"/>
+        <result column="forest_Pets_Time" property="pet.forest_Pets_Time"/>
+    </resultMap>
+    <!-- 分页查询-->
+    <select id="ForestUserPetsEntitySelect" parameterType="com.forest.demo.Entity.Forest_HistoryRecordEntity" resultMap="BaseResultMap">
+        SELECT *
+        FROM forest_user u,forest_pets p,forest_historyrecord h
+		where u.FOREST_User_ID=h.FOREST_User_ID and p.FOREST_Pets_ID=h.FOREST_Pets_ID
+        order by h.forest_User_Pets_Time desc
+        limit #{num},#{size}
+    </select>
+    <!-- 总行数-->
+    <select id="ForestUserPetsEntityRow"  resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM forest_user u,forest_pets p,forest_historyrecord h
+		where u.FOREST_User_ID=h.FOREST_User_ID and p.FOREST_Pets_ID=h.FOREST_Pets_ID
+        order by h.forest_User_Pets_Time desc
+    </select>
+    <!--搜索数据-->
+    <select id="ForestUserPetsEntitySearch" parameterType="com.forest.demo.Entity.Forest_HistoryRecordEntity" resultMap="BaseResultMap">
+        SELECT *
+        FROM forest_user u,forest_pets p,forest_historyrecord h
+		where u.FOREST_User_ID=h.FOREST_User_ID and p.FOREST_Pets_ID=h.FOREST_Pets_ID
+		and   u.FOREST_User_Name like "%"#{forest_User_Name}"%"
+        order by h.forest_User_Pets_Time desc
+        limit #{num},#{size}
+    </select>
+    <!-- 搜索总行数-->
+    <select id="ForestUserPetsEntitySearchRow"  resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM forest_user u,forest_pets p,forest_historyrecord h
+		where u.FOREST_User_ID=h.FOREST_User_ID and p.FOREST_Pets_ID=h.FOREST_Pets_ID
+		and  u.FOREST_User_Name like "%"#{forest_User_Name}"%"
+        order by h.forest_User_Pets_Time desc
+    </select>
+
+    <!--新增数据-->
+    <insert id="ForestUserPetsEntityAdd" keyColumn="forest_HistoryRecord_ID" keyProperty="forest_HistoryRecord_ID" parameterType="com.forest.demo.Entity.Forest_HistoryRecordEntity"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into forest_historyrecord
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="forest_User_ID != null and forest_User_ID != ''">
+                FOREST_User_ID,
+            </if>
+            <if test="forest_Pets_ID != null and forest_Pets_ID != ''">
+                FOREST_Pets_ID,
+            </if>
+            <if test="forest_User_Pets_Time != null and forest_User_Pets_Time != ''">
+                FOREST_User_Pets_Time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="forest_User_ID != null and forest_User_ID != ''">
+                #{forest_User_ID},
+            </if>
+            <if test="forest_Pets_ID != null and forest_Pets_ID != ''">
+                #{forest_Pets_ID},
+            </if>
+            <if test="forest_User_Pets_Time != null and forest_User_Pets_Time != ''">
+                #{forest_User_Pets_Time},
+            </if>
+        </trim>
+    </insert>
+</mapper>

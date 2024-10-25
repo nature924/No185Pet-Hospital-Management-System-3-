@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.forest.demo.Mapper.Forest_userMapper">
+    <resultMap id="BaseResultMap" type="com.forest.demo.Entity.Forest_userEntity">
+        <!--@mbg.generated-->
+        <!--@Table forest_xitongyonghu-->
+        <id column="forest_User_ID" property="forest_User_ID"/>
+        <result column="forest_User_LoginName" property="forest_User_LoginName"/>
+        <result column="forest_User_Password" property="forest_User_Password"/>
+        <result column="forest_User_Name" property="forest_User_Name"/>
+        <result column="forest_User_Sex" property="forest_User_Sex"/>
+        <result column="forest_User_Card" property="forest_User_Card"/>
+        <result column="forest_User_Phone" property="forest_User_Phone"/>
+        <result column="forest_User_Email" property="forest_User_Email"/>
+        <result column="forest_User_Time" property="forest_User_Time"/>
+        <result column="forest_User_Grade" property="forest_User_Grade"/>
+        <result column="forest_User_State" property="forest_User_State"/>
+    </resultMap>
+   <!-- 登录-->
+    <select id="ForestUserEntityLogin" parameterType="com.forest.demo.Entity.Forest_userEntity" resultMap="BaseResultMap">
+        SELECT *
+        FROM forest_user
+        WHERE FOREST_User_LoginName = #{forest_User_LoginName}
+          AND FOREST_User_Password = #{forest_User_Password}
+          and FOREST_User_State=#{forest_User_State}
+    <!--and FOREST_User_Grade=#{forest_User_Grade} -->
+</select>
+<!--用户名是否存在-->
+    <select id="ForestUserEntityIfExitLogin" parameterType="com.forest.demo.Entity.Forest_userEntity" resultMap="BaseResultMap">
+        SELECT *
+        FROM forest_user
+        WHERE FOREST_User_LoginName = #{forest_User_LoginName}
+    </select>
+    <!--身份证是否存在-->
+    <select id="ForestUserEntityIfExitCard" parameterType="com.forest.demo.Entity.Forest_userEntity" resultMap="BaseResultMap">
+        SELECT *
+        FROM forest_user
+        WHERE FOREST_User_Card = #{forest_User_Card}
+    </select>
+    <!--注册-->
+    <insert id="ForestUserEntityRegister" keyColumn="forest_User_ID" keyProperty="forest_User_ID" parameterType="com.forest.demo.Entity.Forest_userEntity"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into forest_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="forest_User_LoginName != null and forest_User_LoginName != ''">
+                FOREST_User_LoginName,
+            </if>
+            <if test="forest_User_Password != null and forest_User_Password != ''">
+                FOREST_User_Password,
+            </if>
+            <if test="forest_User_Name != null and forest_User_Name != ''">
+                FOREST_User_Name,
+            </if>
+            <if test="forest_User_Sex != null and forest_User_Sex != ''">
+                FOREST_User_Sex,
+            </if>
+            <if test="forest_User_Card != null and forest_User_Card != ''">
+                FOREST_User_Card,
+            </if>
+            <if test="forest_User_Phone != null and forest_User_Phone != ''">
+                FOREST_User_Phone,
+            </if>
+            <if test="forest_User_Email != null and forest_User_Email != ''">
+                FOREST_User_Email,
+            </if>
+            <if test="forest_User_Grade != null and forest_User_Grade != ''">
+                FOREST_User_Grade,
+            </if>
+            <if test="forest_User_Time != null and forest_User_Time != ''">
+                FOREST_User_Time,
+            </if>
+            <if test="forest_User_State != null and forest_User_State != ''">
+                FOREST_User_State,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="forest_User_LoginName != null and forest_User_LoginName != ''">
+                #{forest_User_LoginName},
+            </if>
+            <if test="forest_User_Password != null and forest_User_Password != ''">
+                #{forest_User_Password},
+            </if>
+            <if test="forest_User_Name != null and forest_User_Name != ''">
+                #{forest_User_Name},
+            </if>
+            <if test="forest_User_Sex != null and forest_User_Sex != ''">
+                #{forest_User_Sex},
+            </if>
+            <if test="forest_User_Card != null and forest_User_Card != ''">
+                #{forest_User_Card},
+            </if>
+            <if test="forest_User_Phone != null and forest_User_Phone != ''">
+                #{forest_User_Phone},
+            </if>
+            <if test="forest_User_Email != null and forest_User_Email != ''">
+                #{forest_User_Email},
+            </if>
+            <if test="forest_User_Time != null and forest_User_Time != ''">
+                #{forest_User_Time},
+            </if>
+            <if test="forest_User_Grade != null and forest_User_Grade != ''">
+                #{forest_User_Grade},
+            </if>
+            <if test="forest_User_State != null and forest_User_State != ''">
+                #{forest_User_State},
+            </if>
+        </trim>
+    </insert>
+
+
+
+    <!-- 分页查询-->
+    <select id="ForestUserEntitySelect" parameterType="com.forest.demo.Entity.Forest_userEntity" resultMap="BaseResultMap">
+        SELECT *
+        FROM forest_user where FOREST_User_Grade=1
+        order by FOREST_User_Time desc
+        limit #{num},#{size}
+    </select>
+    <!-- 总行数-->
+    <select id="ForestUserEntityRow"  resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM forest_user where FOREST_User_Grade=1
+    </select>
+    <!--搜索数据-->
+    <select id="ForestUserEntitySearch" parameterType="com.forest.demo.Entity.Forest_userEntity" resultMap="BaseResultMap">
+        SELECT *
+        FROM forest_user
+        where FOREST_User_Name like "%"#{forest_VUser_Name}"%" and  FOREST_User_Grade=1
+        order by FOREST_User_Time desc
+        limit #{num},#{size}
+    </select>
+    <!-- 搜索总行数-->
+    <select id="ForestUserEntitySearchRow"  resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM forest_user
+        where FOREST_User_Name like "%"#{forest_User_Name}"%"and  FOREST_User_Grade=1
+    </select>
+    <!--修改医生信息-->
+    <update id="ForestUserEntityState"  parameterType="com.forest.demo.Entity.Forest_userEntity">
+        update forest_user
+        <set>
+            <if test="forest_User_State != null and forest_User_State != ''">
+                FOREST_User_State = #{forest_User_State},
+            </if>
+        </set>
+        where forest_User_ID = #{forest_User_ID}
+    </update>
+</mapper>

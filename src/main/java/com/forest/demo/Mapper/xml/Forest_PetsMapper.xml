@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.forest.demo.Mapper.Forest_PetsMapper">
+    <resultMap id="BaseResultMap" type="com.forest.demo.Entity.Forest_PetsEntity">
+        <!--@mbg.generated-->
+        <!--@Table forest_xitongyonghu-->
+        <id column="forest_Pets_ID" property="forest_Pets_ID"/>
+        <result column="forest_Pets_Photo" property="forest_Pets_Photo"/>
+        <result column="forest_Pets_Name" property="forest_Pets_Name"/>
+        <result column="forest_Pets_Sex" property="forest_Pets_Sex"/>
+        <result column="forest_Pets_Type" property="forest_Pets_Type"/>
+        <result column="forest_Pets_Age" property="forest_Pets_Age"/>
+        <result column="forest_Pets_Disease" property="forest_Pets_Disease"/>
+        <result column="forest_Pets_Time" property="forest_Pets_Time"/>
+    </resultMap>
+    <!-- 分页查询-->
+    <select id="ForestPetsEntitySelect" parameterType="com.forest.demo.Entity.Forest_PetsEntity" resultMap="BaseResultMap">
+        SELECT *
+        FROM forest_pets
+        order by FOREST_Pets_Time desc
+        limit #{num},#{size}
+    </select>
+    <!-- 总行数-->
+    <select id="ForestPetsEntityRow"  resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM forest_pets
+    </select>
+    <!--搜索数据-->
+    <select id="ForestPetsEntitySearch" parameterType="com.forest.demo.Entity.Forest_PetsEntity" resultMap="BaseResultMap">
+        SELECT *
+        FROM forest_pets
+        where FOREST_Pets_Name like "%"#{forest_Pets_Name}"%"
+        order by FOREST_Pets_Time desc
+        limit #{num},#{size}
+    </select>
+    <!-- 搜索总行数-->
+    <select id="ForestPetsEntitySearchRow"  resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM forest_pets
+        where FOREST_Pets_Name like "%"#{forest_Pets_Name}"%"
+    </select>
+    <!--新增数据-->
+    <insert id="ForestPetsEntityRegister" keyColumn="forest_Pets_ID" keyProperty="forest_Pets_ID" parameterType="com.forest.demo.Entity.Forest_PetsEntity"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into forest_pets
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="forest_Pets_Name != null and forest_Pets_Name != ''">
+                FOREST_Pets_Name,
+            </if>
+            <if test="forest_Pets_Sex != null and forest_Pets_Sex != ''">
+                FOREST_Pets_Sex,
+            </if>
+            <if test="forest_Pets_Type != null and forest_Pets_Type != ''">
+                FOREST_Pets_Type,
+            </if>
+            <if test="forest_Pets_Age != null and forest_Pets_Age != ''">
+                FOREST_Pets_Age,
+            </if>
+            <if test="forest_Pets_Disease != null and forest_Pets_Disease != ''">
+                FOREST_Pets_Disease,
+            </if>
+            <if test="forest_Pets_Time != null and forest_Pets_Time != ''">
+                FOREST_Pets_Time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="forest_Pets_Name != null and forest_Pets_Name != ''">
+                #{forest_Pets_Name},
+            </if>
+            <if test="forest_Pets_Sex != null and forest_Pets_Sex != ''">
+                #{forest_Pets_Sex},
+            </if>
+            <if test="forest_Pets_Type != null and forest_Pets_Type != ''">
+                #{forest_Pets_Type},
+            </if>
+            <if test="forest_Pets_Age != null and forest_Pets_Age != ''">
+                #{forest_Pets_Age},
+            </if>
+            <if test="forest_Pets_Disease != null and forest_Pets_Disease != ''">
+                #{forest_Pets_Disease},
+            </if>
+            <if test="forest_Pets_Time != null and forest_Pets_Time != ''">
+                #{forest_Pets_Time},
+            </if>
+        </trim>
+    </insert>
+    <!--详情  编号-->
+    <select id="ForestPetsEntityID" parameterType="com.forest.demo.Entity.Forest_PetsEntity" resultMap="BaseResultMap">
+        SELECT *
+        FROM forest_pets
+        where FOREST_Pets_ID=#{forest_Pets_ID}
+    </select>
+
+    <!--修改宠物信息-->
+    <!--修改宠物信息-->
+    <update id="ForestPetsEntityUpdate"  parameterType="com.forest.demo.Entity.Forest_PetsEntity">
+        update forest_pets
+        <set>
+            <if test="forest_Pets_Photo != null and forest_Pets_Photo != ''">
+                FOREST_Pets_Photo = #{forest_Pets_Photo},
+            </if>
+        </set>
+        where FOREST_Pets_ID = #{forest_Pets_ID}
+    </update>
+
+    <update id="ForestPetsEntityUpdateAll"  parameterType="com.forest.demo.Entity.Forest_PetsEntity">
+        update forest_pets
+        <set>
+            <if test="forest_Pets_Time != null and forest_Pets_Time != ''">
+                FOREST_Pets_Time = #{forest_Pets_Time},
+            </if>
+            <if test="forest_Pets_Disease != null and forest_Pets_Disease != ''">
+                FOREST_Pets_Disease = #{forest_Pets_Disease},
+            </if>
+            <if test="forest_Pets_Age != null and forest_Pets_Age != ''">
+                FOREST_Pets_Age = #{forest_Pets_Age},
+            </if>
+            <if test="forest_Pets_Type != null and forest_Pets_Type != ''">
+                FOREST_Pets_Type = #{forest_Pets_Type},
+            </if>
+            <if test="forest_Pets_Sex != null and forest_Pets_Sex != ''">
+                FOREST_Pets_Sex = #{forest_Pets_Sex},
+            </if>
+            <if test="forest_Pets_Name != null and forest_Pets_Name != ''">
+                FOREST_Pets_Name = #{forest_Pets_Name},
+            </if>
+        </set>
+        where FOREST_Pets_ID = #{forest_Pets_ID}
+    </update>
+</mapper>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.forest.demo.Mapper.Forest_Customer_PetsMapper">
+    <resultMap id="BaseResultMap" type="com.forest.demo.Entity.Forest_Customer_PetsEntity">
+        <!--@mbg.generated-->
+        <!--@Table forest_xitongyonghu-->
+        <id column="forest_Customer_Pets_ID" property="forest_Customer_Pets_ID"/>
+        <result column="forest_Customer_ID" property="forest_Customer_ID"/>
+        <result column="forest_Pets_ID" property="forest_Pets_ID"/>
+        <result column="forest_Customer_Pets_Time" property="forest_Customer_Pets_Time"/>
+        <result column="forest_Customer_Name" property="customer.forest_Customer_Name"/>
+        <result column="forest_Customer_Sex" property="customer.forest_Customer_Sex"/>
+        <result column="forest_Customer_Card" property="customer.forest_Customer_Card"/>
+        <result column="forest_Customer_Phone" property="customer.forest_Customer_Phone"/>
+        <result column="forest_Customer_Email" property="customer.forest_Customer_Email"/>
+        <result column="forest_Customer_Home" property="customer.forest_Customer_Home"/>
+        <result column="forest_Customer_Time" property="customer.forest_Customer_Time"/>
+        <result column="forest_Pets_Photo" property="pet.forest_Pets_Photo"/>
+        <result column="forest_Pets_Name" property="pet.forest_Pets_Name"/>
+        <result column="forest_Pets_Sex" property="pet.forest_Pets_Sex"/>
+        <result column="forest_Pets_Type" property="pet.forest_Pets_Type"/>
+        <result column="forest_Pets_Age" property="pet.forest_Pets_Age"/>
+        <result column="forest_Pets_Disease" property="pet.forest_Pets_Disease"/>
+        <result column="forest_Pets_Time" property="pet.forest_Pets_Time"/>
+    </resultMap>
+    <!-- 分页查询-->
+    <select id="ForestCustomerPetsEntitySelect" parameterType="com.forest.demo.Entity.Forest_Customer_PetsEntity" resultMap="BaseResultMap">
+        SELECT *
+        FROM forest_customer c,forest_pets p,forest_customer_pets cp
+		where c.FOREST_Customer_ID=cp.FOREST_Customer_ID and p.FOREST_Pets_ID=cp.FOREST_Pets_ID
+        order by cp.forest_Customer_Pets_Time desc
+        limit #{num},#{size}
+    </select>
+    <!-- 总行数-->
+    <select id="ForestCustomerPetsEntityRow"  resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM forest_customer c,forest_pets p,forest_customer_pets cp
+		where c.FOREST_Customer_ID=cp.FOREST_Customer_ID and p.FOREST_Pets_ID=cp.FOREST_Pets_ID
+        order by cp.forest_Customer_Pets_Time desc
+    </select>
+    <!--搜索数据-->
+    <select id="ForestCustomerPetsEntitySearch" parameterType="com.forest.demo.Entity.Forest_Customer_PetsEntity" resultMap="BaseResultMap">
+        SELECT *
+        FROM forest_customer c,forest_pets p,forest_customer_pets cp
+		where c.FOREST_Customer_ID=cp.FOREST_Customer_ID and p.FOREST_Pets_ID=cp.FOREST_Pets_ID
+        and c.FOREST_Customer_Name like "%"#{forest_Customer_Name}"%"
+        order by cp.forest_Customer_Pets_Time desc
+        limit #{num},#{size}
+    </select>
+    <!-- 搜索总行数-->
+    <select id="ForestCustomerPetsEntitySearchRow"  resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM forest_customer c,forest_pets p,forest_customer_pets cp
+		where c.FOREST_Customer_ID=cp.FOREST_Customer_ID and p.FOREST_Pets_ID=cp.FOREST_Pets_ID
+        and c.FOREST_Customer_Name like "%"#{forest_Customer_Name}"%"
+    </select>
+    <!--客户详情 -->
+    <select id="ForestCustomerPetsEntitySearchCustomerAll"  parameterType="com.forest.demo.Entity.Forest_Customer_PetsEntity" resultMap="BaseResultMap">
+        SELECT *
+        FROM forest_customer c,forest_pets p,forest_customer_pets cp
+		where c.FOREST_Customer_ID=cp.FOREST_Customer_ID and p.FOREST_Pets_ID=cp.FOREST_Pets_ID
+        and c.FOREST_Customer_ID=#{forest_Customer_ID}
+    </select>
+    <!--宠物详情 -->
+    <select id="ForestCustomerPetsEntitySearchPetsAll"  parameterType="com.forest.demo.Entity.Forest_Customer_PetsEntity" resultMap="BaseResultMap">
+        SELECT *
+        FROM forest_customer c,forest_pets p,forest_customer_pets cp
+		where c.FOREST_Customer_ID=cp.FOREST_Customer_ID and p.FOREST_Pets_ID=cp.FOREST_Pets_ID
+        and p.FOREST_Pets_ID=#{forest_Pets_ID}
+    </select>
+    <!--新增数据-->
+    <insert id="ForestCustomerPetsEntityAdd" keyColumn="forest_Customer_Pets_ID" keyProperty="forest_Customer_Pets_ID" parameterType="com.forest.demo.Entity.Forest_Customer_PetsEntity"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into forest_customer_pets
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="forest_Customer_ID != null and forest_Customer_ID != ''">
+                FOREST_Customer_ID,
+            </if>
+            <if test="forest_Pets_ID != null and forest_Pets_ID != ''">
+                FOREST_Pets_ID,
+            </if>
+            <if test="forest_Customer_Pets_Time != null and forest_Customer_Pets_Time != ''">
+                FOREST_Customer_Pets_Time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="forest_Customer_ID != null and forest_Customer_ID != ''">
+                #{forest_Customer_ID},
+            </if>
+            <if test="forest_Pets_ID != null and forest_Pets_ID != ''">
+                #{forest_Pets_ID},
+            </if>
+            <if test="forest_Customer_Pets_Time != null and forest_Customer_Pets_Time != ''">
+                #{forest_Customer_Pets_Time},
+            </if>
+        </trim>
+    </insert>
+</mapper>

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.forest.demo.Mapper.Forest_VetDoctorMapper">
+    <resultMap id="BaseResultMap" type="com.forest.demo.Entity.Forest_VetDoctorEntity">
+        <!--@mbg.generated-->
+        <!--@Table forest_xitongyonghu-->
+        <id column="forest_VetDoctor_ID" property="forest_VetDoctor_ID"/>
+        <result column="forest_VetDoctor_Name" property="forest_VetDoctor_Name"/>
+        <result column="forest_VetDoctor_Sex" property="forest_VetDoctor_Sex"/>
+        <result column="forest_VetDoctor_Card" property="forest_VetDoctor_Card"/>
+        <result column="forest_VetDoctor_Phone" property="forest_VetDoctor_Phone"/>
+        <result column="forest_VetDoctor_Email" property="forest_VetDoctor_Email"/>
+        <result column="forest_VetDoctor_Skill" property="forest_VetDoctor_Skill"/>
+        <result column="forest_VetDoctor_Detail" property="forest_VetDoctor_Detail"/>
+        <result column="forest_VetDoctor_Time" property="forest_VetDoctor_Time"/>
+        <result column="forest_VetDoctor_Image" property="forest_VetDoctor_Image"/>
+        <result column="forest_VetDoctor_State" property="forest_VetDoctor_State"/>
+    </resultMap>
+    <!-- 分页查询-->
+    <select id="ForestVetDoctorEntitySelect" parameterType="com.forest.demo.Entity.Forest_VetDoctorEntity" resultMap="BaseResultMap">
+        SELECT *
+        FROM forest_vetdoctor
+        order by FOREST_VetDoctor_Time desc
+        limit #{num},#{size}
+    </select>
+    <!-- 总行数-->
+    <select id="ForestVetDoctorEntityRow"  resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM forest_vetdoctor
+    </select>
+    <!--搜索数据-->
+    <select id="ForestVetDoctorEntitySearch" parameterType="com.forest.demo.Entity.Forest_VetDoctorEntity" resultMap="BaseResultMap">
+        SELECT *
+        FROM forest_vetdoctor
+        where FOREST_VetDoctor_Name like "%"#{forest_VetDoctor_Name}"%"
+        order by FOREST_VetDoctor_Time desc
+        limit #{num},#{size}
+    </select>
+    <!-- 搜索总行数-->
+    <select id="ForestVetDoctorEntitySearchRow"  resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM forest_vetdoctor
+        where FOREST_VetDoctor_Name like "%"#{forest_VetDoctor_Name}"%"
+    </select>
+    <!-- 分页查询-->
+    <select id="ForestVetDoctorEntitySelect1" parameterType="com.forest.demo.Entity.Forest_VetDoctorEntity" resultMap="BaseResultMap">
+        SELECT *
+        FROM forest_vetdoctor where Forest_VetDoctor_State=1
+        order by FOREST_VetDoctor_Time desc
+        limit #{num},#{size}
+    </select>
+    <!-- 总行数-->
+    <select id="ForestVetDoctorEntityRow1"  resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM forest_vetdoctor where Forest_VetDoctor_State=1
+    </select>
+    <!--搜索数据-->
+    <select id="ForestVetDoctorEntitySearch1" parameterType="com.forest.demo.Entity.Forest_VetDoctorEntity" resultMap="BaseResultMap">
+        SELECT *
+        FROM forest_vetdoctor
+        where FOREST_VetDoctor_Name like "%"#{forest_VetDoctor_Name}"%" and Forest_VetDoctor_State=1
+        order by FOREST_VetDoctor_Time desc
+        limit #{num},#{size}
+    </select>
+    <!-- 搜索总行数-->
+    <select id="ForestVetDoctorEntitySearchRow1"  resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM forest_vetdoctor
+        where FOREST_VetDoctor_Name like "%"#{forest_VetDoctor_Name}"%" and Forest_VetDoctor_State=1
+    </select>
+
+    <!--详情  身份证-->
+    <select id="Forest_VetDoctorEntityDetails" parameterType="com.forest.demo.Entity.Forest_VetDoctorEntity" resultMap="BaseResultMap">
+        SELECT *
+        FROM forest_vetdoctor
+        where FOREST_VetDoctor_ID=#{forest_VetDoctor_ID}
+    </select>
+
+    <!--新增数据-->
+    <insert id="ForestVetDoctorEntityRegister" keyColumn="forest_VetDoctor_ID" keyProperty="forest_VetDoctor_ID" parameterType="com.forest.demo.Entity.Forest_VetDoctorEntity"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into forest_vetdoctor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="forest_VetDoctor_Name != null and forest_VetDoctor_Name != ''">
+                FOREST_VetDoctor_Name,
+            </if>
+            <if test="forest_VetDoctor_Sex != null and forest_VetDoctor_Sex != ''">
+                FOREST_VetDoctor_Sex,
+            </if>
+            <if test="forest_VetDoctor_Card != null and forest_VetDoctor_Card != ''">
+                FOREST_VetDoctor_Card,
+            </if>
+            <if test="forest_VetDoctor_Phone != null and forest_VetDoctor_Phone != ''">
+                FOREST_VetDoctor_Phone,
+            </if>
+            <if test="forest_VetDoctor_Email != null and forest_VetDoctor_Email != ''">
+                FOREST_VetDoctor_Email,
+            </if>
+            <if test="forest_VetDoctor_Skill != null and forest_VetDoctor_Skill != ''">
+                FOREST_VetDoctor_Skill,
+            </if>
+            <if test="forest_VetDoctor_Detail != null and forest_VetDoctor_Detail != ''">
+                FOREST_VetDoctor_Detail,
+            </if>
+            <if test="forest_VetDoctor_Time != null and forest_VetDoctor_Time != ''">
+                FOREST_VetDoctor_Time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="forest_VetDoctor_Name != null and forest_VetDoctor_Name != ''">
+                #{forest_VetDoctor_Name},
+            </if>
+            <if test="forest_VetDoctor_Sex != null and forest_VetDoctor_Sex != ''">
+                #{forest_VetDoctor_Sex},
+            </if>
+            <if test="forest_VetDoctor_Card != null and forest_VetDoctor_Card != ''">
+                #{forest_VetDoctor_Card},
+            </if>
+            <if test="forest_VetDoctor_Phone != null and forest_VetDoctor_Phone != ''">
+                #{forest_VetDoctor_Phone},
+            </if>
+            <if test="forest_VetDoctor_Email != null and forest_VetDoctor_Email != ''">
+                #{forest_VetDoctor_Email},
+            </if>
+            <if test="forest_VetDoctor_Skill != null and forest_VetDoctor_Skill != ''">
+                #{forest_VetDoctor_Skill},
+            </if>
+            <if test="forest_VetDoctor_Detail != null and forest_VetDoctor_Detail != ''">
+                #{forest_VetDoctor_Detail},
+            </if>
+            <if test="forest_VetDoctor_Time != null and forest_VetDoctor_Time != ''">
+                #{forest_VetDoctor_Time},
+            </if>
+        </trim>
+    </insert>
+    <!--详情  编号-->
+    <select id="ForestVetDoctorEntityID" parameterType="com.forest.demo.Entity.Forest_VetDoctorEntity" resultMap="BaseResultMap">
+        SELECT *
+        FROM forest_vetdoctor
+        where FOREST_VetDoctor_ID=#{forest_VetDoctor_ID}
+    </select>
+
+    <!--修改医生信息-->
+    <update id="ForestVetDoctorEntityUpdate"  parameterType="com.forest.demo.Entity.Forest_VetDoctorEntity">
+        update forest_vetdoctor
+        <set>
+            <if test="forest_VetDoctor_Image != null and forest_VetDoctor_Image != ''">
+                FOREST_VetDoctor_Image = #{forest_VetDoctor_Image},
+            </if>
+        </set>
+        where FOREST_VetDoctor_ID = #{forest_VetDoctor_ID}
+    </update>
+
+    <!--修改医生信息-->
+    <update id="ForestVetDoctorEntityState"  parameterType="com.forest.demo.Entity.Forest_VetDoctorEntity">
+        update forest_vetdoctor
+        <set>
+            <if test="forest_VetDoctor_State != null and forest_VetDoctor_State != ''">
+                FOREST_VetDoctor_State = #{forest_VetDoctor_State},
+            </if>
+        </set>
+        where FOREST_VetDoctor_ID = #{forest_VetDoctor_ID}
+    </update>
+
+    <update id="ForestVetDoctorEntityUpdateAll"  parameterType="com.forest.demo.Entity.Forest_VetDoctorEntity">
+        update forest_vetdoctor
+        <set>
+            <if test="forest_VetDoctor_Name != null and forest_VetDoctor_Name != ''">
+                FOREST_VetDoctor_Name = #{forest_VetDoctor_Name},
+            </if>
+            <if test="forest_VetDoctor_Sex != null and forest_VetDoctor_Sex != ''">
+                FOREST_VetDoctor_Sex = #{forest_VetDoctor_Sex},
+            </if>
+            <if test="forest_VetDoctor_Card != null and forest_VetDoctor_Card != ''">
+                FOREST_VetDoctor_Card = #{forest_VetDoctor_Card},
+            </if>
+            <if test="forest_VetDoctor_Phone != null and forest_VetDoctor_Phone != ''">
+                FOREST_VetDoctor_Phone = #{forest_VetDoctor_Phone},
+            </if>
+            <if test="forest_VetDoctor_Email != null and forest_VetDoctor_Email != ''">
+                FOREST_VetDoctor_Email = #{forest_VetDoctor_Email},
+            </if>
+            <if test="forest_VetDoctor_Skill != null and forest_VetDoctor_Skill != ''">
+                FOREST_VetDoctor_Skill = #{forest_VetDoctor_Skill},
+            </if>
+            <if test="forest_VetDoctor_Time != null and forest_VetDoctor_Time != ''">
+                FOREST_VetDoctor_Time = #{forest_VetDoctor_Time},
+            </if>
+        </set>
+        where FOREST_VetDoctor_ID = #{forest_VetDoctor_ID}
+    </update>
+
+</mapper>

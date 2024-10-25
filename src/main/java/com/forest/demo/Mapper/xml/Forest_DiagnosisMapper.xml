@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.forest.demo.Mapper.Forest_DiagnosisMapper">
+    <resultMap id="BaseResultMap" type="com.forest.demo.Entity.Forest_DiagnosisEntity">
+        <!--@mbg.generated-->
+        <!--@Table forest_xitongyonghu-->
+        <id column="forest_Diagnosis_ID" property="forest_Diagnosis_ID"/>
+        <result column="forest_Diagnosis_Style" property="forest_Diagnosis_Style"/>
+        <result column="forest_Diagnosis_Detail" property="forest_Diagnosis_Detail"/>
+        <result column="forest_Pets_ID" property="forest_Pets_ID"/>
+        <result column="forest_VetDoctor_ID" property="forest_VetDoctor_ID"/>
+        <result column="forest_Diagnosis_Time" property="forest_Diagnosis_Time"/>
+        <result column="forest_Pets_Photo" property="pet.forest_Pets_Photo"/>
+        <result column="forest_Pets_Name" property="pet.forest_Pets_Name"/>
+        <result column="forest_Pets_Sex" property="pet.forest_Pets_Sex"/>
+        <result column="forest_Pets_Type" property="pet.forest_Pets_Type"/>
+        <result column="forest_Pets_Age" property="pet.forest_Pets_Age"/>
+        <result column="forest_Pets_Disease" property="pet.forest_Pets_Disease"/>
+        <result column="forest_Pets_Time" property="pet.forest_Pets_Time"/>
+        <result column="forest_VetDoctor_Image" property="doctor.forest_VetDoctor_Image"/>
+        <result column="forest_VetDoctor_Name" property="doctor.forest_VetDoctor_Name"/>
+        <result column="forest_VetDoctor_Sex" property="doctor.forest_VetDoctor_Sex"/>
+        <result column="forest_VetDoctor_Card" property="doctor.forest_VetDoctor_Card"/>
+        <result column="forest_VetDoctor_Phone" property="doctor.forest_VetDoctor_Phone"/>
+        <result column="forest_VetDoctor_Email" property="doctor.forest_VetDoctor_Email"/>
+        <result column="forest_VetDoctor_Skill" property="doctor.forest_VetDoctor_Skill"/>
+        <result column="forest_VetDoctor_Detail" property="doctor.forest_VetDoctor_Detail"/>
+        <result column="forest_VetDoctor_Time" property="doctor.forest_VetDoctor_Time"/>
+    </resultMap>
+    <!-- 分页查询-->
+    <select id="ForestDiagnosisEntitySelect" parameterType="com.forest.demo.Entity.Forest_DiagnosisEntity" resultMap="BaseResultMap">
+        SELECT *
+        FROM forest_pets p,forest_vetdoctor v,forest_diagnosis d
+		where p.FOREST_Pets_ID=d.FOREST_Pets_ID and v.FOREST_VetDoctor_ID=d.FOREST_VetDoctor_ID
+		ORDER BY d.FOREST_Diagnosis_Time desc
+        limit #{num},#{size}
+    </select>
+    <!-- 总行数-->
+    <select id="ForestDiagnosisEntityRow"  resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM forest_pets p,forest_vetdoctor v,forest_diagnosis d
+		where p.FOREST_Pets_ID=d.FOREST_Pets_ID and v.FOREST_VetDoctor_ID=d.FOREST_VetDoctor_ID
+		ORDER BY d.FOREST_Diagnosis_Time desc
+    </select>
+    <!--搜索数据-->
+    <select id="ForestDiagnosisEntitySearch" parameterType="com.forest.demo.Entity.Forest_DiagnosisEntity" resultMap="BaseResultMap">
+        SELECT *
+        FROM forest_pets p,forest_vetdoctor v,forest_diagnosis d
+		where p.FOREST_Pets_ID=d.FOREST_Pets_ID and v.FOREST_VetDoctor_ID=d.FOREST_VetDoctor_ID
+		and v.FOREST_VetDoctor_Name like "%"#{forest_VetDoctor_Name}"%"
+		ORDER BY d.FOREST_Diagnosis_Time desc
+        limit #{num},#{size}
+    </select>
+    <!-- 搜索总行数-->
+    <select id="ForestDiagnosisEntitySearchRow"  resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM forest_pets p,forest_vetdoctor v,forest_diagnosis d
+		where p.FOREST_Pets_ID=d.FOREST_Pets_ID and v.FOREST_VetDoctor_ID=d.FOREST_VetDoctor_ID
+		and v.FOREST_VetDoctor_Name like "%"#{forest_VetDoctor_Name}"%"
+    </select>
+    <!--详情-->
+    <select id="ForestDiagnosisEntityDetails" parameterType="com.forest.demo.Entity.Forest_DiagnosisEntity" resultMap="BaseResultMap">
+        SELECT *
+        FROM forest_pets p,forest_vetdoctor v,forest_diagnosis d
+		where p.FOREST_Pets_ID=d.FOREST_Pets_ID and v.FOREST_VetDoctor_ID=d.FOREST_VetDoctor_ID
+		and v.FOREST_VetDoctor_Card=#{forest_VetDoctor_Card}
+    </select>
+
+    <!--新增数据-->
+    <insert id="ForestDiagnosisEntityRegister" keyColumn="forest_Diagnosis_ID" keyProperty="forest_Diagnosis_ID" parameterType="com.forest.demo.Entity.Forest_DiagnosisEntity"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into forest_diagnosis
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="forest_Diagnosis_Style != null and forest_Diagnosis_Style != ''">
+                FOREST_Diagnosis_Style,
+            </if>
+            <if test="forest_Diagnosis_Detail != null and forest_Diagnosis_Detail != ''">
+                FOREST_Diagnosis_Detail,
+            </if>
+            <if test="forest_Pets_ID != null and forest_Pets_ID != ''">
+                FOREST_Pets_ID,
+            </if>
+            <if test="forest_VetDoctor_ID != null and forest_VetDoctor_ID != ''">
+                FOREST_VetDoctor_ID,
+            </if>
+            <if test="forest_Diagnosis_Time != null and forest_Diagnosis_Time != ''">
+                FOREST_Diagnosis_Time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="forest_Diagnosis_Style != null and forest_Diagnosis_Style != ''">
+                #{forest_Diagnosis_Style},
+            </if>
+            <if test="forest_Diagnosis_Detail != null and forest_Diagnosis_Detail != ''">
+                #{forest_Diagnosis_Detail},
+            </if>
+            <if test="forest_Pets_ID != null and forest_Pets_ID != ''">
+                #{forest_Pets_ID},
+            </if>
+            <if test="forest_VetDoctor_ID != null and forest_VetDoctor_ID != ''">
+                #{forest_VetDoctor_ID},
+            </if>
+            <if test="forest_Diagnosis_Time != null and forest_Diagnosis_Time != ''">
+                #{forest_Diagnosis_Time},
+            </if>
+        </trim>
+    </insert>
+    <!--详情  编号-->
+    <select id="ForestDiagnosisEntityID" parameterType="com.forest.demo.Entity.Forest_DiagnosisEntity" resultMap="BaseResultMap">
+        SELECT *
+        FROM forest_pets p,forest_vetdoctor v,forest_diagnosis d
+		where p.FOREST_Pets_ID=d.FOREST_Pets_ID and v.FOREST_VetDoctor_ID=d.FOREST_VetDoctor_ID
+		and d.FOREST_Diagnosis_ID=#{forest_Diagnosis_ID}
+    </select>
+    <!--修改信息  业务人员-->
+    <update id="ForestDiagnosisEntityUpdate"  parameterType="com.forest.demo.Entity.Forest_DiagnosisEntity">
+        update forest_diagnosis
+        <set>
+            <if test="forest_Diagnosis_Style != null and forest_Diagnosis_Style != ''">
+                FOREST_Diagnosis_Style = #{forest_Diagnosis_Style},
+            </if>
+            <if test="forest_Diagnosis_Detail != null and forest_Diagnosis_Detail != ''">
+                FOREST_Diagnosis_Detail = #{forest_Diagnosis_Detail},
+            </if>
+        </set>
+        where FOREST_Diagnosis_ID=#{forest_Diagnosis_ID}
+    </update>
+</mapper>
