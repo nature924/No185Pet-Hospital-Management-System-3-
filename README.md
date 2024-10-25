@@ -1,37 +1,71 @@
-# ForestLovePets
+基于Springboot的宠物医院管理系统（程序+论文）
+=
+### 完整代码获取地址：从戎源码网 ([https://armycodes.com/](https://armycodes.com/))
+### 作者微信：19941326836  QQ：952045282 
+### 承接计算机毕业设计、Java毕业设计、Python毕业设计、深度学习、机器学习
+### 选题+开题报告+任务书+程序定制+安装调试+论文+答辩ppt 一条龙服务
+### 所有选题地址https://github.com/nature924/allProject
 
-#### 介绍
-功能需求:“爱心”宠物诊所的职员在工作中需要查阅和管理如下信息:诊所的兽医、客户以及客户的宠物。
+一、项目介绍
+---
+基于Springboot框架实现的宠物医院管理系统包含两种角色：管理员、用户,系统分为前台和后台两大模块，主要功能如下。
 
-#### 软件架构
-软件架构说明
+### 【用户模块】：
+1. 系统分析：用户可以浏览系统的功能和流程，了解系统的使用方法。
+2. 界面布局：用户可以查看系统的界面布局，了解系统的界面设计和使用方式。
+3. 医生信息：用户可以查看宠物医院的医生信息，包括医生的个人资料、专长等。
+4. 客户信息：用户可以管理自己的客户信息，包括查看、编辑、删除等操作。
+5. 宠物管理：用户可以管理自己的宠物信息，包括查看、编辑、删除等操作。
+6. 浏览管理：用户可以浏览宠物医院的相关信息，包括医院介绍、服务内容等。
+7. 诊断管理：用户可以查看宠物的诊断信息，包括诊断结果、治疗方案等。
 
-
-#### 安装教程
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 使用说明
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+### 【管理员模块】：
+1. 系统分析：管理员可以浏览系统的功能和流程，了解系统的使用方法。
+2. 界面布局：管理员可以查看系统的界面布局，了解系统的界面设计和使用方式。
+3. 医生信息：管理员可以管理宠物医院的医生信息，包括新增、编辑、删除等操作。
+4. 客户信息：管理员可以管理宠物医院的客户信息，包括新增、编辑、删除等操作。
+5. 宠物管理：管理员可以管理宠物医院的宠物信息，包括新增、编辑、删除等操作。
+6. 浏览管理：管理员可以管理宠物医院的相关信息，包括发布、编辑、删除等操作。
+7. 诊断管理：管理员可以管理宠物的诊断信息，包括新增、编辑、删除等操作。
+8. 医生管理：管理员可以管理医生的信息，包括查看、编辑、删除等操作。
+9. 用户管理：管理员可以管理用户的信息，包括查看、编辑、删除等操作。
 
 
-#### 特技
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+
+
+
+二、项目技术
+---
+- 编程语言：Java
+- 数据库：MySQL
+- 项目管理工具：Maven
+- 前端技术：VUE、HTML、Jquery、Bootstrap
+- 后端技术：Spring、SpringMVC、MyBatis
+
+三、运行环境
+---
+- 操作系统：Windows、macOS都可以
+- JDK版本：JDK1.8以上都可以
+- 开发工具：IDEA、Ecplise、Myecplise都可以
+- 数据库: MySQL5.7以上都可以
+- Tomcat：任意版本都可以
+- Maven：任意版本都可以
+
+四、运行截图
+---
+### 论文截图：
+![image/1.png](limage/1.png)
+
+### 程序截图：
+![image/1.png](image/1.png)
+![image/1.png](image/2.png)
+![image/1.png](image/3.png)
+![image/1.png](image/4.png)
+![image/1.png](image/5.png)
+![image/1.png](image/6.png)
+![image/1.png](image/7.png)
+![image/1.png](image/8.png)
+![image/1.png](image/9.png)
+
+
